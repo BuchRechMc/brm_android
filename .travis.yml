@@ -14,4 +14,4 @@ notifications:
   slack: buchrechmc:tIyp44k1BZMDkooD8WqhgFvV
 
 script:
-    gradle build connectedCheck
+     - ./gradlew build connectedCheck
