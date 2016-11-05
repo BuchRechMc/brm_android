@@ -22,6 +22,9 @@ import com.fortum.nokid.buchrechmc.AsyncTasks.LoginTask;
 import com.fortum.nokid.buchrechmc.Entities.User;
 import com.fortum.nokid.buchrechmc.R;
 
+import net.hockeyapp.android.CrashManager;
+import net.hockeyapp.android.UpdateManager;
+
 import java.util.concurrent.ExecutionException;
 
 import io.realm.Realm;
@@ -68,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         this.context = this;
+        checkForUpdates();
     }
 
     public void login() {
@@ -173,4 +177,37 @@ public class LoginActivity extends AppCompatActivity {
 
         return valid;
     }
+
+    private void checkForCrashes() {
+        CrashManager.register(this);
+    }
+
+    private void checkForUpdates() {
+        // Remove this for store builds!
+        UpdateManager.register(this);
+    }
+
+    private void unregisterManagers() {
+        UpdateManager.unregister();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // ... your own onResume implementation
+        checkForCrashes();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        unregisterManagers();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unregisterManagers();
+    }
+
 }

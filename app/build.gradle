@@ -24,15 +24,30 @@ android {
         abortOnError false
     }
 
+    signingConfigs {
+        ci {
+            keyAlias "ci-key-alias"
+            keyPassword System.getenv("CI_KEYSTORE_PASSWORD")
+            storeFile file("ci-key.keystore")
+            storePassword System.getenv("CI_KEYSTORE_PASSWORD")
+        }
+    }
+
     defaultConfig {
         applicationId "com.fortum.nokid.buchrechmc"
+        manifestPlaceholders = [HOCKEYAPP_APP_ID: "071560da62764131915554ea9f0d0fe4"]
         minSdkVersion 15
         targetSdkVersion 24
         versionCode 1252
         versionName "1.25.2"
     }
     buildTypes {
-        release {
+        debug_with_ci_keystore.initWith(buildTypes.debug)
+        debug_with_ci_keystore {
+            if(System.getenv("CI_KEYSTORE_PASSWORD")) signingConfig signingConfigs.ci
+            minifyEnabled false
+        }
+        debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -56,6 +71,7 @@ dependencies {
     compile 'com.joanzapata.pdfview:android-pdfview:1.0.4@aar'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.4'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.8.4'
+    compile 'net.hockeyapp.android:HockeySDK:4.1.1'
     compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
         transitive = true;
     }
