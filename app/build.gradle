@@ -4,7 +4,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'io.fabric.tools:gradle:1.+'
+        classpath 'io.fabric.tools:gradle:1.22.0'
     }
 }
 apply plugin: 'com.android.application'
@@ -17,13 +17,13 @@ repositories {
 
 
 android {
-    compileSdkVersion 22
+    compileSdkVersion 24
     buildToolsVersion "22.0.1"
 
     defaultConfig {
         applicationId "com.fortum.nokid.buchrechmc"
         minSdkVersion 15
-        targetSdkVersion 22
+        targetSdkVersion 24
         versionCode 1252
         versionName "1.25.2"
     }
@@ -45,9 +45,9 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:22.2.1'
-    compile 'com.android.support:design:22.2.1'
-    compile 'com.android.support:recyclerview-v7:22.2.1'
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:design:24.2.1'
+    compile 'com.android.support:recyclerview-v7:24.2.1'
     compile 'org.springframework.android:spring-android-rest-template:1.0.1.RELEASE'
     compile 'com.joanzapata.pdfview:android-pdfview:1.0.4@aar'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.4'

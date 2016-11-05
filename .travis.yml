@@ -3,9 +3,12 @@ android:
   components:
     - tools
     - platform-tools
-    - build-tools-23.0.2
-    - android-22
+    - build-tools-22.0.1
+    - android-24
     - extra-android-m2repository
+
+notifications:
+  slack: buchrechmc:tIyp44k1BZMDkooD8WqhgFvV
 
 script:
    - ./gradlew build connectedCheck
